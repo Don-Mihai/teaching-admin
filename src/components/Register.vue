@@ -7,15 +7,15 @@ import router from '@/router'
 let formValues = ref({ email: '', password: '', firstName: '' })
 
 const onSignUp = async () => {
-  const [error, isValid] = validate()
+//   const [error, isValid] = validate()
 
-  setError(error)
+//   setError(error)
 
-  if (isValid) {
-    const user = (await axios.post('users', formValues)).data
-    localStorage.setItem('userId', user.id)
-    navigate('/modules')
-  }
+//   if (isValid) {
+//     const user = (await axios.post('users', formValues)).data
+//     localStorage.setItem('userId', user.id)
+//     navigate('/modules')
+//   }
 }
 </script>
 
