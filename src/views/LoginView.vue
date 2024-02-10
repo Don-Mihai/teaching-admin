@@ -6,7 +6,6 @@ import Auth from '@/components/Auth.vue';
 	<div className="auth">
 		<Auth />
 	</div>
-  
 </template>
 
 <style lang="scss" scoped>
