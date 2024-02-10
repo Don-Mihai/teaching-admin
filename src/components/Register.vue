@@ -28,6 +28,7 @@ const onSignUp = async () => {
       <InputText v-model="formValues.firstName" label="First name" fullWidth />
       <Button @click="onSignUp" variant="contained"> Register </Button>
     </div>
+    <router-link :to="'/login/auth'">Alredy signed up?</router-link>
   </div>
 </template>
 

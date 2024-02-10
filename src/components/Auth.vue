@@ -38,6 +38,7 @@ const onSignIn = async () => {
                 </Button>
             </div>
            <Toast />
+           <router-link :to="'/login/register'">No account?</router-link>
         </div>
 </template>
 
