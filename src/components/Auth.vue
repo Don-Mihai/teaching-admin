@@ -5,8 +5,8 @@ import InputText from 'primevue/inputtext';
 import router from '@/router';
 import Button from 'primevue/button';
 import Toast from 'primevue/toast';
-
 const toast = useToast();
+
 
 let formValues = ref({email: '', password: ''})
 
@@ -23,8 +23,6 @@ const onSignIn = async () => {
             showError()
         }
     };
-
-
 
 </script>
 <template >

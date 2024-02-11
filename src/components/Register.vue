@@ -21,21 +21,13 @@ const validateAndSignUp = () => {
   passwordError.value = validatePassword(formValues.value)[formValues.value.password] || ''
   nameError.value = validateName(formValues.value)[formValues.value.firstName] || ''
 
-  if (!emailError.value && !passwordError.value && !nameError.value) {
+  const isValid = !emailError.value && !passwordError.value && !nameError.value
+
+  if (isValid) {
     router.push('/home')
   }
 }
 
-const isInvalid = computed(() => !!emailError.value || !!passwordError.value || !!nameError.value)
-
-defineExpose({
-  formValues,
-  emailError,
-  passwordError,
-  nameError,
-  validateAndSignUp,
-  isInvalid
-})
 </script>
 
 <template>
