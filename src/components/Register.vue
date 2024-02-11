@@ -1,32 +1,54 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import InputText from 'primevue/inputtext'
+import { computed, ref, defineExpose } from 'vue'
+import { validateEmail, validateName, validatePassword } from '../utils/utils'
+import { useRouter } from 'vue-router'
 import Button from 'primevue/button'
-import router from '@/router'
+import InputText from 'primevue/inputtext'
 
-let formValues = ref({ email: '', password: '', firstName: '' })
+const router = useRouter()
 
-const onSignUp = async () => {
-//   const [error, isValid] = validate()
+const formValues = ref({
+  email: '',
+  password: '',
+  firstName: ''
+})
+const emailError = ref('')
+const passwordError = ref('')
+const nameError = ref('')
 
-//   setError(error)
+const validateAndSignUp = () => {
+  emailError.value = validateEmail(formValues.value)[formValues.value.email] || ''
+  passwordError.value = validatePassword(formValues.value)[formValues.value.password] || ''
+  nameError.value = validateName(formValues.value)[formValues.value.firstName] || ''
 
-//   if (isValid) {
-//     const user = (await axios.post('users', formValues)).data
-//     localStorage.setItem('userId', user.id)
-//     navigate('/modules')
-//   }
+  if (!emailError.value && !passwordError.value && !nameError.value) {
+    router.push('/home')
+  }
 }
+
+const isInvalid = computed(() => !!emailError.value || !!passwordError.value || !!nameError.value)
+
+defineExpose({
+  formValues,
+  emailError,
+  passwordError,
+  nameError,
+  validateAndSignUp,
+  isInvalid
+})
 </script>
 
 <template>
   <div className="register-form">
     <h2 className="register-form__title">Register</h2>
-    <div className="register-form__inputs">
+    <div class="register-form__inputs">
       <InputText v-model="formValues.email" label="Email" fullWidth />
+      <span v-if="emailError">{{ emailError }}</span>
       <InputText v-model="formValues.password" label="Password" fullWidth />
+      <span v-if="passwordError">{{ passwordError }}</span>
       <InputText v-model="formValues.firstName" label="First name" fullWidth />
-      <Button @click="onSignUp" variant="contained"> Register </Button>
+      <span v-if="nameError">{{ nameError }}</span>
+      <Button @click="validateAndSignUp" variant="contained"> Register </Button>
     </div>
     <router-link :to="'/login/auth'">Alredy signed up?</router-link>
   </div>
