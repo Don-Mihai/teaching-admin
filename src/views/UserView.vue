@@ -30,7 +30,6 @@ const updateUserRole = async (user: IUser, role: ROLES) => {
   try {
     const updatedUser = { ...user, role }
     await axios.put(`http://localhost:3001/users/${user.id}`, updatedUser)
-    // Сбрасываем состояние другого чекбокса, чтобы только один чекбокс мог быть выбран
     if (role === ROLES.TEACHER) {
       user.isStudent = false
     } else if (role === ROLES.STUDENT) {
